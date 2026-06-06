@@ -42,6 +42,18 @@ dataset_path = os.path.join(
     "dataset"
 )
 
+# PASTA PARA GRÁFICOS
+
+IMG_DIR = os.path.join(
+    BASE_DIR,
+    "img"
+)
+
+if not os.path.exists(IMG_DIR):
+    os.makedirs(IMG_DIR)
+
+print(f"\nGráficos serão salvos em:\n{IMG_DIR}\n")
+
 # CARREGAMENTO DO DATASET
 
 
@@ -269,7 +281,6 @@ print(
 
 # MATRIZ DE CONFUSÃO
 
-
 cm = confusion_matrix(
     y_test,
     y_pred
@@ -306,11 +317,22 @@ plt.ylabel(
 
 plt.tight_layout()
 
+plt.savefig(
+    os.path.join(
+        IMG_DIR,
+        "confusion_matrix.png"
+    ),
+    dpi=300,
+    bbox_inches="tight"
+)
+
+print("✓ confusion_matrix.png salvo")
+
 plt.show()
+plt.close()
 
 
 # GRÁFICO ACCURACY
-
 
 plt.figure(figsize=(8,5))
 
@@ -342,11 +364,22 @@ plt.grid(True)
 
 plt.tight_layout()
 
+plt.savefig(
+    os.path.join(
+        IMG_DIR,
+        "accuracy.png"
+    ),
+    dpi=300,
+    bbox_inches="tight"
+)
+
+print("✓ accuracy.png salvo")
+
 plt.show()
+plt.close()
 
 
 # GRÁFICO LOSS
-
 
 plt.figure(figsize=(8,5))
 
@@ -378,7 +411,19 @@ plt.grid(True)
 
 plt.tight_layout()
 
+plt.savefig(
+    os.path.join(
+        IMG_DIR,
+        "loss.png"
+    ),
+    dpi=300,
+    bbox_inches="tight"
+)
+
+print("✓ loss.png salvo")
+
 plt.show()
+plt.close()
 
 
 # SALVAR MODELO
@@ -402,4 +447,27 @@ model.save(
 
 print(
     "\nModelo salvo em models/astrovision.keras"
+)
+
+print("\nArquivos gerados:")
+
+print(
+    os.path.join(
+        IMG_DIR,
+        "confusion_matrix.png"
+    )
+)
+
+print(
+    os.path.join(
+        IMG_DIR,
+        "accuracy.png"
+    )
+)
+
+print(
+    os.path.join(
+        IMG_DIR,
+        "loss.png"
+    )
 )
